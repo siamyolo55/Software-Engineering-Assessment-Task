@@ -29,7 +29,7 @@ const defaultConfig = {
 	server: {
 		proxy: {
 			'^/api/.*': {
-				target: 'API_HERE', // TODO: Update the api
+				target: 'http://23.94.211.99:8090', // TODO: Update the api
 				changeOrigin: true,
 				secure: false,
 				ws: true,
