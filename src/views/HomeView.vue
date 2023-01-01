@@ -17,6 +17,7 @@
 	let store = useStore()
 
 	let devices = computed(() => store.getters.devices)
+	console.log(devices)
 
 	let isDevicesLoaded = computed(() => {
 		try {

@@ -1,6 +1,9 @@
 <template>
     <main>
         <form @submit.prevent="handleSubmit">
+            <label>Name :</label>
+            <input v-model="name" required>
+
             <label>Username :</label>
             <input v-model="username" required>
 
@@ -21,44 +24,52 @@
         </form>
     </main>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 
     import * as EmailValidator from 'email-validator'
+    import { computed } from 'vue'
+	import { useStore } from 'vuex'
 
-    export default {
+    let store = useStore()
 
-        data() {
-            return {
-                username: "",
-                email: "",
-                password: "",
-                retypePassword: "",
-            }
-        },
+    let name = "", email = "", username = "",
+    password = "", retypePassword = ""
 
-        methods: {
-            handleSubmit(e: Event) {
-                e.preventDefault();
+    let postData = () => {
+        console.log('here');
+        store.dispatch('SET_SIGNUP_DATA', {
+            username: username,
+            email: email,
+            password: password,
+            passwordConfirm: retypePassword,
+            name: name,
+            emailVisibility: true
+        })
+    }
 
-                if(this.username === ""){
-                    alert("Username can't be empty");
-                    return;
-                }
+    let handleSubmit = (e: Event) => {
+        e.preventDefault();
 
-                if(!EmailValidator.validate(this.email)){
-                    alert('Invalid Email');
-                    return;
-                }
-
-                if(this.password === "" || this.password !== this.retypePassword){
-                    alert("Passwords don't match");
-                }
-
-                
-
-            }
+        if(name === ""){
+            alert("Name can't be empty");
+            return;
         }
 
+        if(username === ""){
+            alert("Username can't be empty");
+            return;
+        }
+
+        if(!EmailValidator.validate(email)){
+            alert('Invalid Email');
+            return;
+        }
+
+        if(password === "" || password !== retypePassword){
+            alert("Passwords don't match");
+        }
+
+        postData()
     }
 
 </script>

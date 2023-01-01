@@ -1,8 +1,10 @@
 import type { Store as VuexStore, ActionContext, CommitOptions, DispatchOptions } from 'vuex'
 import type { IModuleState as IDevicesState } from '../devices/types'
+import type { IModuleState as ISignupState } from '../signup/types'
 
 export interface IRootState {
 	devices: IDevicesState
+	signup: ISignupState
 }
 
 export interface IRootGetters {}

@@ -1,5 +1,6 @@
 import type { Module, ModuleTree } from 'vuex'
 import DevicesModule from '../devices/devices-module'
+import SignupModule from '../signup/signup-module'
 import { actions } from './actions'
 import { getters } from './getters'
 import { mutations } from './mutations'
@@ -8,6 +9,7 @@ import type { IRootState } from './types'
 
 const modules: ModuleTree<IRootState> = {
 	DevicesModule,
+	SignupModule
 }
 
 const RootModule: Module<IRootState, IRootState> = {
