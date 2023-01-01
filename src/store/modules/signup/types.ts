@@ -10,20 +10,25 @@ export interface ISignUp {
 	emailVisibility: boolean
 }
 
+
 export interface IModuleState {
 	signupData: ISignUp | null
+	loggedIn: boolean
 }
 
 export interface IModuleGetters {
 	signupData(state: IModuleState): ISignUp | null
+	loggedIn(state: IModuleState): boolean
 }
 
 export enum EModuleMutation {
 	SET_SIGNUP_DATA = 'SET_SIGNUP_DATA',
+	SET_LOGGEDIN = 'SET_LOGGEDIN'
 }
 
 export type TModuleMutations<S = IModuleState> = {
 	[EModuleMutation.SET_SIGNUP_DATA](state: S, signupData: ISignUp | null): void
+	[EModuleMutation.SET_LOGGEDIN](state: S, loggedIn: boolean): void
 }
 
 export type AugmentedActionContext = {

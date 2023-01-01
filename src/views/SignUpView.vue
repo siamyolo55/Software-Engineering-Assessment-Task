@@ -1,5 +1,8 @@
 <template>
     <main>
+        <div class="button">
+                <button @click="verifyEmail" class="submit" v-if="loggedIn"> Verify Email </button>
+            </div>
         <form @submit.prevent="handleSubmit">
             <label>Name :</label>
             <input v-model="name" required>
@@ -14,62 +17,53 @@
             <input v-model="password" type="password"  required>
             
             <label>Retype Password :</label>  
-            <input v-model="retypePassword" type="password"  required>
+            <input v-model="passwordConfirm" type="password"  required>
             
             <br>
 
             <div class="button">
                 <button class="submit" type="submit">Sign up</button>
             </div>
+            
         </form>
     </main>
 </template>
 <script setup lang="ts">
 
-    import * as EmailValidator from 'email-validator'
-    import { computed } from 'vue'
+    import { validateForm } from '@/utils/formValidation'
+    import type { FormData } from '@/utils/types'
 	import { useStore } from 'vuex'
+    import { computed } from 'vue'
+    import { SignupModuleAction } from '@/store/modules/signup/types'
+    import { verifyUserEmail } from '@/api/verifyEmail'
 
     let store = useStore()
 
-    let name = "", email = "", username = "",
-    password = "", retypePassword = ""
+    let loggedIn = computed(() => store.getters.loggedIn)
 
-    let postData = () => {
-        console.log('here');
-        store.dispatch('SET_SIGNUP_DATA', {
-            username: username,
-            email: email,
-            password: password,
-            passwordConfirm: retypePassword,
-            name: name,
-            emailVisibility: true
-        })
+    let name = "", email = "", username = "",
+    password = "", passwordConfirm = "", emailVisibility = true
+
+
+    let postData = (formData: FormData) => {
+        store.dispatch(SignupModuleAction.SetSignupData, formData)
+        console.log('after submission', loggedIn.value)
     }
 
     let handleSubmit = (e: Event) => {
         e.preventDefault();
 
-        if(name === ""){
-            alert("Name can't be empty");
-            return;
-        }
+        let formData: FormData = {name, username, email, password, passwordConfirm, emailVisibility}
 
-        if(username === ""){
-            alert("Username can't be empty");
-            return;
-        }
+        if(validateForm(formData))
+            postData(formData)
 
-        if(!EmailValidator.validate(email)){
-            alert('Invalid Email');
-            return;
-        }
+        console.log(loggedIn.value)
 
-        if(password === "" || password !== retypePassword){
-            alert("Passwords don't match");
-        }
+    }
 
-        postData()
+    let verifyEmail = async () => {
+        await verifyUserEmail(email)
     }
 
 </script>
