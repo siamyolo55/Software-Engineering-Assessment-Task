@@ -1,15 +1,15 @@
 import request from '@/utils/request'
-import type { ISignUp } from '@/store/modules/signup/types'
+import type { LoginForm } from '@/utils/types' 
 
-export const setSignup = async (signupData: ISignUp) => {
+export const userLogin = async (loginForm: LoginForm) => {
 	const response = await request({
-		url: `/candidates/records`,
+		url: `/candidates/auth-with-password`,
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json',
 		},
         data: {
-            ...signupData
+            ...loginForm
         }
 	})
 	return response

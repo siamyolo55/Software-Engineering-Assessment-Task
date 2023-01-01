@@ -1,4 +1,5 @@
 <template>
+    <h1>Signup</h1>
     <main>
         <div class="button">
                 <button @click="verifyEmail" class="submit" v-if="loggedIn"> Verify Email </button>
@@ -101,16 +102,6 @@
     }
 
 
-    .pill {
-        display: inline-block;
-        margin: 20px 10px 0 0 ;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        cursor: pointer;
-        background: #eee;
-    }
-
 	button {
 		text-align: center;
 		padding: 10px 0px;
@@ -124,10 +115,4 @@
         text-align: center;
     }
 
-    .error {
-        color: #ff0000;
-        margin-top: 10px;
-        font-size: 0.8em;
-        font-weight: bold;
-    }
 </style>

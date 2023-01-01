@@ -6,3 +6,8 @@ export type FormData = {
     passwordConfirm: string,
     emailVisibility: boolean
 }
+
+export type LoginForm = {
+    identity: string,
+    password: string
+}
