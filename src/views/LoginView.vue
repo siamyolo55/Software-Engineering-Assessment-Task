@@ -14,9 +14,11 @@
             <div class="button">
                 <button class="submit" type="submit">Login</button>
             </div>
-            <p v-if="error">Email or Password Wrong</p>
             
         </form>
+        <h3 id="error"></h3>
+        <br>
+
         <h3>New here?</h3>
         <div class="button">
             <router-link to="/sign-up"> Sign Up </router-link>
@@ -46,10 +48,11 @@
         await new Promise(r => setTimeout(r, 3000))
 
         let loginError = computed(() => store.getters.loginError)
-        console.log(loginError.value)
+        
         if(loginError.value)
-            error = true
+            document.getElementById('error')!.innerText = 'Wrong Email or Password'
         else{
+            document.getElementById('error')!.innerText = ''
             router.push('/home')
         }
 
