@@ -37,6 +37,7 @@
     import { computed } from 'vue'
     import { SignupModuleAction } from '@/store/modules/signup/types'
     import { verifyUserEmail } from '@/api/verifyEmail'
+    import router from '@/router'
 
     let store = useStore()
 
@@ -56,8 +57,15 @@
 
         let formData: FormData = {name, username, email, password, passwordConfirm, emailVisibility}
 
-        if(validateForm(formData))
-            postData(formData)
+        if(validateForm(formData)){
+            try{
+                postData(formData)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+
 
         console.log(loggedIn.value)
 
@@ -65,6 +73,7 @@
 
     let verifyEmail = async () => {
         await verifyUserEmail(email)
+        router.push('/')
     }
 
 </script>

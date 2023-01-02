@@ -14,27 +14,45 @@
             <div class="button">
                 <button class="submit" type="submit">Login</button>
             </div>
+            <p v-if="error">Email or Password Wrong</p>
             
         </form>
-        <h3 v-if="error"></h3>
+        <h3>New here?</h3>
+        <div class="button">
+            <router-link to="/sign-up"> Sign Up </router-link>
+        </div>
+
     </main>
 </template>
 <script setup lang="ts">
 
-    import { userLogin } from '@/api/login'
-    import type { LoginForm } from '@/utils/types' 
     import router from '@/router';
+    import { EModuleAction, type ILoginForm } from '@/store/modules/login/types'
+    import { computed } from 'vue'
+    import { useStore } from 'vuex'
 
-    let email = "", password = "", error = ""
+    let store = useStore()
 
-    let handleLogin = async () => {
-        let loginForm: LoginForm = {identity: email, password}
+    let email = "", password = "",
+    error = false
+
+    let handleLogin = async (e: Event) => {
+        e.preventDefault()
+
+        let loginForm: ILoginForm = {identity: email, password}
         console.log(loginForm)
-        let data: any = await userLogin(loginForm)
+        store.dispatch(EModuleAction.UserLogin, loginForm)
 
-        if(data && data.token != ""){
-            router.push('/')
+        await new Promise(r => setTimeout(r, 3000))
+
+        let loginError = computed(() => store.getters.loginError)
+        console.log(loginError.value)
+        if(loginError.value)
+            error = true
+        else{
+            router.push('/home')
         }
+
     }
 
 

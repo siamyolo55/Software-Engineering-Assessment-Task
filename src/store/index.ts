@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import type { IModule as IDevicesModule } from './modules/devices/types'
 import type { IModule, IModule as ISignupModule } from './modules/signup/types'
+import type { IModule as ILoginModule } from './modules/login/types'
 import RootModule from './modules/root/root-module'
 import type { IRootState } from './modules/root/types'
 
@@ -9,6 +10,7 @@ export const store = createStore<IRootState>(RootModule)
 type StoreModules = {
 	devices: IDevicesModule
 	signup: ISignupModule
+	login: ILoginModule
 }
 
 //! README
@@ -32,5 +34,5 @@ type StoreModules = {
  */
 // export type Store = IDevicesModule<Pick<StoreModules, 'devices'>>
 // export type Store = ISignupModule<Pick<StoreModules, 'signup'>>
-export type Store = IModule<Pick<StoreModules, 'devices' | 'signup'>>
+export type Store = IModule<Pick<StoreModules, 'devices' | 'signup' | 'login'>>
 
