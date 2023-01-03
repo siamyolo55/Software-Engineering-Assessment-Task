@@ -2,11 +2,13 @@ import type { Store as VuexStore, ActionContext, CommitOptions, DispatchOptions 
 import type { IModuleState as IDevicesState } from '../devices/types'
 import type { IModuleState as ISignupState } from '../signup/types'
 import type { IModuleState as ILoginState } from '../login/types'
+import type { IModuleState as IPatientsState } from '../patients/types'
 
 export interface IRootState {
 	devices: IDevicesState
 	signup: ISignupState
 	login: ILoginState
+	patients: IPatientsState
 }
 
 export interface IRootGetters {}

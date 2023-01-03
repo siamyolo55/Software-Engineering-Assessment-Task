@@ -6,47 +6,46 @@
 				<iframe ref="banner" src="/Old Codebase/banner/index.html" frameborder="0"></iframe>
 			</div>
 			<div>
-				<iframe src="/Old Codebase/patients/index.html" frameborder="0"></iframe>
+				<iframe ref="patient" src="/Old Codebase/patients/index.html" frameborder="0"></iframe>
 			</div>
-			<!-- <device-list v-if="isDevicesLoaded" />
-			<button @click="load" v-else>Load Devices</button> -->
 		</div>
 	</main>
 </template>
 
 <script setup lang="ts">
-	import DeviceList from '@/components/DeviceList.vue'
-	import { DevicesModuleAction } from '@/store/modules/devices/types'
+	// import DeviceList from '@/components/DeviceList.vue'
+	// import { DevicesModuleAction } from '@/store/modules/devices/types'
+	import { PatientsModuleAction } from '@/store/modules/patients/types';
 	import { computed, ref, onMounted } from 'vue'
 	import { useStore } from 'vuex'
 
 	let store = useStore()
 
 	let banner = ref(null)
+	let patient = ref(null)
 
 	onMounted(() => {
-		console.log(banner.value)
+		let token = store.getters.userData.token
+		console.log({token})
+		let patients
+		store.dispatch(PatientsModuleAction.GetPatients, token).then(() => {
+			patients = store.getters.patients
+			console.log(patients)
+			let patientIframe = patient.value as unknown as HTMLIFrameElement
+			let data = { patients }
+			data = JSON.parse(JSON.stringify(data))
+			patientIframe.contentWindow!.postMessage(data, "*")
+		})
 		window.addEventListener('message', function(event) {
 			let message = event.data
-			let bannerElement = banner.value as unknown as HTMLIFrameElement
-			bannerElement.contentWindow!.postMessage(message, "*")
+			let bannerIframe = banner.value as unknown as HTMLIFrameElement
+			bannerIframe.contentWindow!.postMessage(message, "*")
 		});
 	})
 
 	let devices = computed(() => store.getters.devices)
-	// console.log(devices)
 
-	let isDevicesLoaded = computed(() => {
-		try {
-			return devices.value.length > 0
-		} catch (e) {
-			return false
-		}
-	})
 
-	const load = () => {
-		store.dispatch(DevicesModuleAction.GetDevices)
-	}
 
 	
 </script>

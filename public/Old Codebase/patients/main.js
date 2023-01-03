@@ -1,8 +1,15 @@
-$(document).ready(function () {
-	let patients = getPatients()
+// $(document).ready(function () {
+// 	let patients = getPatients()
 
+// 	$('#patients').html(createTable(patients))
+
+// 	setupClickEvent()
+// })
+
+window.addEventListener('message', (event) => {
+	let data = event.data.patients
+	let patients = getPatients(data)
 	$('#patients').html(createTable(patients))
-
 	setupClickEvent()
 })
 
@@ -30,7 +37,7 @@ function createTable(patients) {
 	return html
 }
 
-function getPatients() {
+function getPatients(patients) {
 	/**
 	 * @returns Patients list
 	 *
@@ -41,88 +48,7 @@ function getPatients() {
 	 * ! Do not call any API here. All API calls must lie in the core Vue framework.
 	 *
 	 */
-	return [
-		{
-			address: {
-				street: 'Victor Plains',
-				suite: 'Suite 879',
-				city: 'Wisokyburgh',
-				zipcode: '90566-7771',
-				geo: {
-					lat: '-43.9509',
-					lng: '-34.4618',
-				},
-			},
-			collectionId: 'pwuw57n2eiwkwkm',
-			collectionName: 'patients',
-			created: '2022-12-27 08:43:35.377Z',
-			email: 'Sincere@april.biz',
-			id: 'vzj837hd3d7geup',
-			name: 'Leanne Graham',
-			phone: 1770736803156442,
-			updated: '2022-12-27 08:45:49.520Z',
-		},
-		{
-			address: {
-				street: 'Kulas Light',
-				suite: 'Apt. 556',
-				city: 'Gwenborough',
-				zipcode: '92998-3874',
-				geo: {
-					lat: '-37.3159',
-					lng: '81.1496',
-				},
-			},
-			collectionId: 'pwuw57n2eiwkwkm',
-			collectionName: 'patients',
-			created: '2022-12-27 08:44:37.619Z',
-			email: 'Shanna@melissa.tv',
-			id: 'jkrozx5hq8pvoa3',
-			name: 'Ervin Howell',
-			phone: 10692659309125,
-			updated: '2022-12-27 08:45:36.356Z',
-		},
-		{
-			address: {
-				street: 'Douglas Extension',
-				suite: 'Suite 847',
-				city: 'McKenziehaven',
-				zipcode: '59590-4157',
-				geo: {
-					lat: '-68.6102',
-					lng: '-47.0653',
-				},
-			},
-			collectionId: 'pwuw57n2eiwkwkm',
-			collectionName: 'patients',
-			created: '2022-12-27 08:46:33.531Z',
-			email: 'Nathan@yesenia.net',
-			id: 'cn0glbv40oig6u9',
-			name: 'Clementine Bauch',
-			phone: 14631234447,
-			updated: '2022-12-27 08:46:33.531Z',
-		},
-		{
-			address: {
-				street: 'Hoeger Mall',
-				suite: 'Apt. 692',
-				city: 'South Elvis',
-				zipcode: '53919-4257',
-				geo: {
-					lat: '29.4572',
-					lng: '-164.2990',
-				},
-			},
-			collectionId: 'pwuw57n2eiwkwkm',
-			collectionName: 'patients',
-			created: '2022-12-27 08:47:02.775Z',
-			email: 'Julianne.OConner@kory.org',
-			id: 'l0smr5e39j7o62q',
-			name: 'Patricia Lebsack',
-			phone: 4931709623156,
-			updated: '2022-12-27 08:47:02.775Z',
-		},
-	]
+	return patients
 }
 
 function setupClickEvent() {
