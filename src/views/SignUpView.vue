@@ -49,7 +49,6 @@
 
     let postData = (formData: FormData) => {
         store.dispatch(SignupModuleAction.SetSignupData, formData)
-        console.log('after submission', loggedIn.value)
     }
 
     let handleSubmit = (e: Event) => {
@@ -65,9 +64,6 @@
                 console.log(err)
             }
         }
-
-
-        console.log(loggedIn.value)
 
     }
 

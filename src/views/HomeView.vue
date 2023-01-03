@@ -26,11 +26,9 @@
 
 	onMounted(() => {
 		let token = store.getters.userData.token
-		console.log({token})
 		let patients
 		store.dispatch(PatientsModuleAction.GetPatients, token).then(() => {
 			patients = store.getters.patients
-			console.log(patients)
 			let patientIframe = patient.value as unknown as HTMLIFrameElement
 			let data = { patients }
 			data = JSON.parse(JSON.stringify(data))

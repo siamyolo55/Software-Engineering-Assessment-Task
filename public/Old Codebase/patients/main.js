@@ -59,7 +59,6 @@ function setupClickEvent() {
 			email: children[1].innerHTML,
 			phone: children[2].innerHTML,
 		}
-		// console.log(selectedPatient)
 		window.parent.postMessage(selectedPatient, "*")
 	})
 

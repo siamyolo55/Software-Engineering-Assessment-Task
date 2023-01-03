@@ -42,7 +42,6 @@
         e.preventDefault()
 
         let loginForm: ILoginForm = {identity: email, password}
-        console.log(loginForm)
         store.dispatch(EModuleAction.UserLogin, loginForm)
 
         await new Promise(r => setTimeout(r, 3000))

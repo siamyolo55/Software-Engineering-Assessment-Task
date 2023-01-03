@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	window.addEventListener('message', function(event) {
-		console.log(event.data)
 		let patient = event.data
 
 		$('#banner').html(`<p>Selected Patient: ${patient.name}</p>`)

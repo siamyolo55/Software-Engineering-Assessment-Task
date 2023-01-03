@@ -10,7 +10,6 @@ export const actions: ActionTree<IModuleState, IRootState> & TModuleActions = {
 			const data: any = await getPatients(token)
 			// Process data
 			const patients = data.items as IPatient[]
-			// console.log(patients)
 			commit(EModuleMutation.SET_PATIENTS, patients)
 		} catch (e) {
 			console.log('catttthhh')

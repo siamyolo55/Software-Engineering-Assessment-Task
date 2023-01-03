@@ -10,7 +10,6 @@ export const actions: ActionTree<IModuleState, IRootState> & TModuleActions = {
 			// Process data
 			commit(EModuleMutation.SET_USER_DATA, data)
 		} catch (e) {
-			console.log('inside catch bloc')
 			commit(EModuleMutation.SET_USER_DATA, null)
 			commit(EModuleMutation.SET_LOGIN_ERROR, true)
 		}
