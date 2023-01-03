@@ -6,7 +6,7 @@ import { type IModuleState, type TModuleActions, EModuleAction, type IPatient, E
 export const actions: ActionTree<IModuleState, IRootState> & TModuleActions = {
 	async [EModuleAction.GetPatients]({ commit }, token) {
 		try {
-			console.log(token)
+			// console.log(token)
 			const data: any = await getPatients(token)
 			// Process data
 			const patients = data.items as IPatient[]

@@ -13,10 +13,8 @@
 </template>
 
 <script setup lang="ts">
-	// import DeviceList from '@/components/DeviceList.vue'
-	// import { DevicesModuleAction } from '@/store/modules/devices/types'
-	import { PatientsModuleAction } from '@/store/modules/patients/types';
-	import { computed, ref, onMounted } from 'vue'
+	import { PatientsModuleAction } from '@/store/modules/patients/types'
+	import { ref, onMounted } from 'vue'
 	import { useStore } from 'vuex'
 
 	let store = useStore()
@@ -40,8 +38,6 @@
 			bannerIframe.contentWindow!.postMessage(message, "*")
 		});
 	})
-
-	let devices = computed(() => store.getters.devices)
 
 
 

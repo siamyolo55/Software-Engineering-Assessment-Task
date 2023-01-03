@@ -27,6 +27,7 @@
             </div>
             
         </form>
+        <h3 id="error"></h3>
     </main>
 </template>
 <script setup lang="ts">
@@ -59,9 +60,11 @@
         if(validateForm(formData)){
             try{
                 postData(formData)
+                document.getElementById('error')!.innerText = ''
             }
             catch(err){
                 console.log(err)
+                document.getElementById('error')!.innerText = 'Wrong Email or Password'
             }
         }
 

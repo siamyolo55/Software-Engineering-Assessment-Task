@@ -30,30 +30,27 @@
 
     import router from '@/router';
     import { EModuleAction, type ILoginForm } from '@/store/modules/login/types'
-    import { computed } from 'vue'
     import { useStore } from 'vuex'
 
     let store = useStore()
 
-    let email = "", password = "",
-    error = false
+    let email = "", password = ""
 
     let handleLogin = async (e: Event) => {
         e.preventDefault()
 
         let loginForm: ILoginForm = {identity: email, password}
-        store.dispatch(EModuleAction.UserLogin, loginForm)
+        store.dispatch(EModuleAction.UserLogin, loginForm).then(() => {
+            let loginError = store.getters.loginError
+            if(loginError)
+                document.getElementById('error')!.innerText = 'Wrong Email or Password'
+            else{
+                document.getElementById('error')!.innerText = ''
+                router.push('/home')
+            }
+        })
 
-        await new Promise(r => setTimeout(r, 3000))
-
-        let loginError = computed(() => store.getters.loginError)
         
-        if(loginError.value)
-            document.getElementById('error')!.innerText = 'Wrong Email or Password'
-        else{
-            document.getElementById('error')!.innerText = ''
-            router.push('/home')
-        }
 
     }
 
